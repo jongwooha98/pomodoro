@@ -1,73 +1,145 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
+
 import Break from './components/Break';
 import Session from './components/Session';
+import Timer from './components/Timer';
+import beepSound from './audio/beep-sound.mov';
 
 function App() {
-  const [breakLength, setBreakLength] = useState(5); //in minutes
+  const beep = document.getElementById('beep');
+  const [state, setState] = useState({
+    breakLength: 300,
+    sessionLength: 1500,
+    timeLeft: 1500,
+    isActive: false,
+    isBreak: false,
+  });
+
+  useEffect(() => {
+    let intervalId;
+    if (state.isActive && state.timeLeft > 0) {
+      intervalId = setInterval(() => {
+        setState((prevState) => ({
+          ...state,
+          timeLeft: prevState.timeLeft - 1,
+        }));
+        console.log('useEffect');
+      }, 1000);
+    } else if (!state.isBreak && state.timeLeft === 0) {
+      setState((prevState) => ({
+        ...state,
+        isBreak: !prevState.isBreak,
+        timeLeft: state.breakLength,
+      }));
+      beep.play();
+    } else if (state.isBreak && state.timeLeft === 0) {
+      setState((prevState) => ({
+        ...state,
+        isBreak: !prevState.isBreak,
+        timeLeft: state.sessionLength,
+      }));
+      beep.play();
+    }
+    return () => clearInterval(intervalId);
+  }, [state, beep]);
+
+  function handleReset() {
+    setState({
+      breakLength: 300,
+      sessionLength: 1500,
+      timeLeft: 1500,
+      isActive: false,
+      isBreak: false,
+    });
+    beep.pause();
+    beep.currentTime = 0;
+  }
+
+  function handlePause() {
+    setState((prevState) => ({
+      ...state,
+      isActive: !prevState.isActive,
+    }));
+  }
+
   function changeBreakLength(event) {
     switch (event.target.id) {
       case 'break-decrement':
-        if (breakLength <= 1) {
-          setBreakLength(1);
+        if (state.breakLength <= 60) {
+          setState({
+            ...state,
+            breakLength: 60,
+            timeLeft: 60,
+          });
         } else {
-          setBreakLength(breakLength - 1);
+          setState((prevState) => ({
+            ...state,
+            breakLength: prevState.breakLength - 60,
+            timeLeft: prevState.breakLength - 60,
+          }));
         }
         break;
       case 'break-increment':
-        if (breakLength >= 60) {
-          setBreakLength(60);
+        if (state.breakLength >= 3600) {
+          setState({ ...state, breakLength: 3600, timeLeft: 3600 });
         } else {
-          setBreakLength(breakLength + 1);
+          setState((prevState) => ({
+            ...state,
+            breakLength: prevState.breakLength + 60,
+            timeLeft: prevState.breakLength + 60,
+          }));
         }
         break;
       default:
         break;
     }
   }
-
-  const [sessionLength, setSessionLength] = useState(25); //in minutes
-
+  // Combine changeBreakLength fxn and changeSessionLength fxn
   function changeSessionLength(event) {
     switch (event.target.id) {
       case 'session-decrement':
-        if (sessionLength <= 1) {
-          setSessionLength(1);
+        if (state.sessionLength <= 60) {
+          setState({ ...state, sessionLength: 60, timeLeft: 60 });
         } else {
-          setSessionLength(sessionLength - 1);
+          setState((prevState) => ({
+            ...state,
+            sessionLength: prevState.sessionLength - 60,
+            timeLeft: prevState.sessionLength - 60,
+          }));
         }
         break;
       case 'session-increment':
-        if (sessionLength >= 60) {
-          setSessionLength(60);
+        if (state.sessionLength >= 3600) {
+          setState({ ...state, sessionLength: 3600, timeLeft: 3600 });
         } else {
-          setSessionLength(sessionLength + 1);
+          setState((prevState) => ({
+            ...state,
+            sessionLength: prevState.sessionLength + 60,
+            timeLeft: prevState.sessionLength + 60,
+          }));
         }
         break;
       default:
         break;
     }
   }
+
   return (
     <>
       <div className="app">
         <h1>Pomodoro Timer</h1>
-        <Break
-          breakLength={breakLength}
-          changeBreakLength={changeBreakLength}
+        <Break state={state} changeBreakLength={changeBreakLength} />
+        <Session state={state} changeSessionLength={changeSessionLength} />
+        <Timer
+          state={state}
+          handlePause={handlePause}
+          handleReset={handleReset}
+          beep={beep}
         />
-        <Session
-          session={sessionLength}
-          changeSessionLength={changeSessionLength}
-        />
-        <div id="timer-label">
-          <h2>Session</h2>
-        </div>
-        <div id="time-left"></div>
-        <div>
-          <button id="start_stop">start_stop</button>
-          <button id="reset">Reset</button>
-        </div>
+        <audio id="beep" preload="auto">
+          <source src={beepSound} />
+        </audio>
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 
 function Session(props) {
-  const { sessionLength, changeSessionLength } = props;
+  const { state, changeSessionLength } = props;
 
   return (
     <>
@@ -12,7 +12,7 @@ function Session(props) {
         <button id="session-decrement" onClick={changeSessionLength}>
           -
         </button>
-        <div id="session-length">{sessionLength}</div>
+        <div id="session-length">{state.sessionLength / 60}</div>
         <button id="session-increment" onClick={changeSessionLength}>
           +
         </button>
