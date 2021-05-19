@@ -1,35 +1,127 @@
+@import './theme.scss';
+
 .app {
+  margin: 0;
+  padding: 0;
+
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
-  font-size: 1.6rem;
-
+  font-size: $sizeMd1;
+  background-color: $colorGrey;
+  color: $colorText;
+  letter-spacing: 0.1rem;
   .title {
     h1 {
-      font-size: 3.2rem;
+      font-size: $sizeLg3;
     }
   }
+
+  .session_break {
+    width: 50%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    .session {
+      display: flex;
+      flex-flow: column;
+      background-color: #fff;
+      .session-label {
+        h3 {
+          font-size: $sizeMd2;
+          font-weight: bold;
+        }
+      }
+      .timer-setting {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        button {
+          &.session-decrement {
+            background-color: inherit;
+            border-style: none;
+          }
+          &.session-increment {
+            background-color: inherit;
+            border-style: none;
+          }
+        }
+        .session-length {
+          font-size: $sizeLg1;
+        }
+      }
+    }
+    .break {
+      display: flex;
+      flex-flow: column;
+      background-color: #fff;
+      .break-label {
+        h3 {
+          font-size: $sizeMd2;
+          font-weight: bold;
+        }
+      }
+      .timer-setting {
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+        button {
+          &.break-decrement {
+            background-color: inherit;
+            border-style: none;
+          }
+          &.break-increment {
+            background-color: inherit;
+            border-style: none;
+          }
+        }
+        .break-length {
+          font-size: $sizeLg1;
+        }
+      }
+    }
+  }
+
   .timer {
-  }
-  .session {
+    box-sizing: border-box;
     display: flex;
     flex-flow: column;
-    background-color: lightcoral;
-    .timer-setting {
-      display: flex;
-      flex-flow: row;
-      justify-content: center;
+    // justify-content: center;
+    align-items: center;
+
+    width: 80%;
+    padding: 5rem 0;
+    margin: 1rem;
+    background-color: #fff;
+    border-radius: 5rem;
+    .timer-label {
+      h2 {
+        font-size: $sizeLg1;
+        font-weight: bold;
+      }
     }
-  }
-  .break {
-    display: flex;
-    flex-flow: column;
-    background-color: lightgreen;
-    .timer-setting {
-      display: flex;
-      flex-flow: row;
-      justify-content: center;
+    .time-left {
+      margin: 1rem;
+      font-size: $sizeLg3;
+    }
+    button {
+      box-sizing: border-box;
+      &.start_stop {
+        padding: 0.5rem 2rem;
+        margin: 0.25rem;
+        font-size: $sizeMd2;
+        font-weight: bold;
+        letter-spacing: 0.2rem;
+        background-color: lighten($colorAccent, 5%);
+        color: #fff;
+        border-style: none;
+        border-radius: 1rem;
+      }
+      &.reset {
+        font-weight: bold;
+        border-radius: 0.5rem;
+      }
     }
   }
 }

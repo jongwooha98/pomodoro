@@ -7,29 +7,31 @@ function Timer(props) {
 
     let computedSecond = String(second).length === 1 ? `0${second}` : second;
     let computedMinute = String(minute).length === 1 ? `0${minute}` : minute;
-    console.log('rendering timerDisplay');
 
     return computedMinute + ':' + computedSecond;
   }
   return (
     <div className="timer">
-      <div id="timer-label">
+      <div id="timer-label" className="timer-label">
         <h2>{state.isBreak ? 'Break' : 'Session'}</h2>
       </div>
-      <div id="time-left">{timerDisplay()}</div>
+      <div id="time-left" className="time-left">
+        {timerDisplay()}
+      </div>
       <button
         id="start_stop"
+        className="start_stop"
         type="button"
-        className="btn btn-primary"
         onClick={handlePause}
       >
-        {state.isActive ? (
-          <i class="fas fa-pause"></i>
-        ) : (
-          <i class="fas fa-play"></i>
-        )}
+        {state.isActive ? 'PAUSE' : 'START'}
       </button>
-      <button id="reset" onClick={handleReset}>
+      <button
+        type="button"
+        className="reset btn btn-danger"
+        id="reset"
+        onClick={handleReset}
+      >
         Reset
       </button>
     </div>

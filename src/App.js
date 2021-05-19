@@ -8,6 +8,7 @@ import beepSound from './audio/beep-sound.mov';
 
 function App() {
   const beep = document.getElementById('beep');
+
   const [state, setState] = useState({
     breakLength: 300,
     sessionLength: 1500,
@@ -130,8 +131,10 @@ function App() {
       <div className="title">
         <h1>Pomodoro Timer</h1>
       </div>
-      <Break state={state} changeBreakLength={changeBreakLength} />
-      <Session state={state} changeSessionLength={changeSessionLength} />
+      <div className="session_break">
+        <Break state={state} changeBreakLength={changeBreakLength} />
+        <Session state={state} changeSessionLength={changeSessionLength} />
+      </div>
       <Timer
         state={state}
         handlePause={handlePause}
