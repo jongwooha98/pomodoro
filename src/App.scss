@@ -1,0 +1,35 @@
+.app {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+
+  .title {
+    h1 {
+      font-size: 3.2rem;
+    }
+  }
+  .timer {
+  }
+  .session {
+    display: flex;
+    flex-flow: column;
+    background-color: lightcoral;
+    .timer-setting {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+    }
+  }
+  .break {
+    display: flex;
+    flex-flow: column;
+    background-color: lightgreen;
+    .timer-setting {
+      display: flex;
+      flex-flow: row;
+      justify-content: center;
+    }
+  }
+}

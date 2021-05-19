@@ -12,21 +12,27 @@ function Timer(props) {
     return computedMinute + ':' + computedSecond;
   }
   return (
-    <>
+    <div className="timer">
       <div id="timer-label">
         <h2>{state.isBreak ? 'Break' : 'Session'}</h2>
       </div>
       <div id="time-left">{timerDisplay()}</div>
-      <span>{state.timeLeft}</span>
-      <div>
-        <button id="start_stop" onClick={handlePause}>
-          {state.isActive ? 'Stop' : 'Start'}
-        </button>
-        <button id="reset" onClick={handleReset}>
-          Reset
-        </button>
-      </div>
-    </>
+      <button
+        id="start_stop"
+        type="button"
+        className="btn btn-primary"
+        onClick={handlePause}
+      >
+        {state.isActive ? (
+          <i class="fas fa-pause"></i>
+        ) : (
+          <i class="fas fa-play"></i>
+        )}
+      </button>
+      <button id="reset" onClick={handleReset}>
+        Reset
+      </button>
+    </div>
   );
 }
 

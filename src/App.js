@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 
 import Break from './components/Break';
 import Session from './components/Session';
@@ -126,22 +126,22 @@ function App() {
   }
 
   return (
-    <>
-      <div className="app">
+    <div className="app">
+      <div className="title">
         <h1>Pomodoro Timer</h1>
-        <Break state={state} changeBreakLength={changeBreakLength} />
-        <Session state={state} changeSessionLength={changeSessionLength} />
-        <Timer
-          state={state}
-          handlePause={handlePause}
-          handleReset={handleReset}
-          beep={beep}
-        />
-        <audio id="beep" preload="auto">
-          <source src={beepSound} />
-        </audio>
       </div>
-    </>
+      <Break state={state} changeBreakLength={changeBreakLength} />
+      <Session state={state} changeSessionLength={changeSessionLength} />
+      <Timer
+        state={state}
+        handlePause={handlePause}
+        handleReset={handleReset}
+        beep={beep}
+      />
+      <audio id="beep" preload="auto">
+        <source src={beepSound} />
+      </audio>
+    </div>
   );
 }
 
