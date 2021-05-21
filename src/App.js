@@ -43,7 +43,7 @@ function App() {
       beep.play();
     }
     return () => clearInterval(intervalId);
-  }, [state, beep]);
+  });
 
   function handleReset() {
     setState({
