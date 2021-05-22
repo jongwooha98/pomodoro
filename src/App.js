@@ -12,44 +12,51 @@ function App() {
   const [state, setState] = useState({
     breakLength: 300,
     sessionLength: 1500,
-    timeLeft: 1500,
+    breakTimeLeft: 300,
+    sessionTimeLeft: 1500,
     isActive: false,
     isBreak: false,
   });
 
-  useEffect(() => {
-    let intervalId;
-    if (state.isActive && state.timeLeft > 0) {
-      intervalId = setInterval(() => {
-        setState((prevState) => ({
-          ...state,
-          timeLeft: prevState.timeLeft - 1,
-        }));
-        console.log('useEffect');
-      }, 1000);
-    } else if (!state.isBreak && state.timeLeft === 0) {
-      setState((prevState) => ({
-        ...state,
-        isBreak: !prevState.isBreak,
-        timeLeft: state.breakLength,
-      }));
-      beep.play();
-    } else if (state.isBreak && state.timeLeft === 0) {
-      setState((prevState) => ({
-        ...state,
-        isBreak: !prevState.isBreak,
-        timeLeft: state.sessionLength,
-      }));
-      beep.play();
-    }
-    return () => clearInterval(intervalId);
-  });
+  // useEffect(() => {
+  //   let intervalId;
+  //   if (state.isActive && state.timeLeft > 0) {
+  //     intervalId = setInterval(() => {
+  //       setState((prevState) => ({
+  //         ...state,
+  //         timeLeft: prevState.timeLeft - 1,
+  //       }));
+  //       console.log('useEffect');
+  //     }, 1000);
+  //   } else if (!state.isBreak && state.timeLeft === 0) {
+  //     setState((prevState) => ({
+  //       ...state,
+  //       isBreak: !prevState.isBreak,
+  //       timeLeft: state.breakLength,
+  //     }));
+  //     beep.play();
+  //   } else if (state.isBreak && state.timeLeft === 0) {
+  //     setState((prevState) => ({
+  //       ...state,
+  //       isBreak: !prevState.isBreak,
+  //       timeLeft: state.sessionLength,
+  //     }));
+  //     beep.play();
+  //   }
+  //   return () => clearInterval(intervalId);
+  // }, [state, beep]);
+
+  // useEffect(()=>{
+  //   let intervalId;
+  //   if ()
+  // })
 
   function handleReset() {
     setState({
       breakLength: 300,
       sessionLength: 1500,
-      timeLeft: 1500,
+      breakTimeLeft: 300,
+      sessionTimeLeft: 1500,
       isActive: false,
       isBreak: false,
     });
