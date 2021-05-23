@@ -1,6 +1,5 @@
 function Session(props) {
   const { state, changeSessionLength } = props;
-  let sessionLength = state.sessionLength / 60;
   return (
     <div className="session">
       <div id="session-label" className="session-label">
@@ -8,21 +7,23 @@ function Session(props) {
       </div>
       <div className="timer-setting">
         <button
+          type="button"
           id="session-decrement"
           className="session-decrement"
           onClick={changeSessionLength}
         >
-          <i class="fas fa-arrow-down"></i>
+          <i className="fas fa-arrow-down" />
         </button>
         <div id="session-length" className="session-length">
-          {sessionLength}
+          {state.sessionLength / 60}
         </div>
         <button
+          type="button"
           id="session-increment"
           className="session-increment"
           onClick={changeSessionLength}
         >
-          <i class="fas fa-arrow-up"></i>
+          <i className="fas fa-arrow-up" />
         </button>
       </div>
     </div>

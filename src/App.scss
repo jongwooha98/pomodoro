@@ -38,12 +38,13 @@
         flex-flow: row;
         justify-content: center;
         button {
+          padding: 1rem;
           &.session-decrement {
-            background-color: inherit;
+            background-color: blue;
             border-style: none;
           }
           &.session-increment {
-            background-color: inherit;
+            background-color: blue;
             border-style: none;
           }
         }
@@ -68,6 +69,8 @@
         flex-flow: row;
         justify-content: center;
         button {
+          padding: 1rem;
+
           &.break-decrement {
             background-color: inherit;
             border-style: none;

@@ -46,10 +46,50 @@ function App() {
   //   return () => clearInterval(intervalId);
   // }, [state, beep]);
 
-  // useEffect(()=>{
-  //   let intervalId;
-  //   if ()
-  // })
+  useEffect(() => {
+    // let sessionIntervalId;
+    let intervalId;
+    switch (state.isBreak) {
+      case false:
+        if (state.isActive && state.sessionTimeLeft > 0) {
+          intervalId = setInterval(() => {
+            setState((prevState) => ({
+              ...prevState,
+              sessionTimeLeft: prevState.sessionTimeLeft - 10,
+            }));
+            console.log('in session...');
+          }, 1000);
+        } else if (state.sessionTimeLeft === 0) {
+          setState((prevState) => ({
+            ...prevState,
+            isBreak: !prevState.isBreak,
+            sessionTimeLeft: state.sessionLength,
+          }));
+        }
+        break;
+      case true:
+        if (state.isActive && state.breakTimeLeft > 0) {
+          intervalId = setInterval(() => {
+            setState((prevState) => ({
+              ...prevState,
+              breakTimeLeft: prevState.breakTimeLeft - 10,
+            }));
+            console.log('in break...');
+          }, 1000);
+        } else if (state.breakTimeLeft === 0) {
+          setState((prevState) => ({
+            ...prevState,
+            isBreak: !prevState.isBreak,
+            breakTimeLeft: state.breakLength,
+          }));
+        }
+        break;
+      default:
+        break;
+    }
+
+    return () => clearInterval(intervalId);
+  });
 
   function handleReset() {
     setState({
@@ -66,7 +106,7 @@ function App() {
 
   function handlePause() {
     setState((prevState) => ({
-      ...state,
+      ...prevState,
       isActive: !prevState.isActive,
     }));
   }
@@ -78,24 +118,25 @@ function App() {
           setState({
             ...state,
             breakLength: 60,
-            timeLeft: 60,
+            breakTimeLeft: 60,
           });
+          console.log('clicked break dec');
         } else {
           setState((prevState) => ({
-            ...state,
+            ...prevState,
             breakLength: prevState.breakLength - 60,
-            timeLeft: prevState.breakLength - 60,
+            breakTimeLeft: prevState.breakLength - 60,
           }));
         }
         break;
       case 'break-increment':
         if (state.breakLength >= 3600) {
-          setState({ ...state, breakLength: 3600, timeLeft: 3600 });
+          setState({ ...state, breakLength: 3600, breakTimeLeft: 3600 });
         } else {
           setState((prevState) => ({
-            ...state,
+            ...prevState,
             breakLength: prevState.breakLength + 60,
-            timeLeft: prevState.breakLength + 60,
+            breakTimeLeft: prevState.breakLength + 60,
           }));
         }
         break;
@@ -108,23 +149,23 @@ function App() {
     switch (event.target.id) {
       case 'session-decrement':
         if (state.sessionLength <= 60) {
-          setState({ ...state, sessionLength: 60, timeLeft: 60 });
+          setState({ ...state, sessionLength: 60, sessionTimeLeft: 60 });
         } else {
           setState((prevState) => ({
-            ...state,
+            ...prevState,
             sessionLength: prevState.sessionLength - 60,
-            timeLeft: prevState.sessionLength - 60,
+            sessionTimeLeft: prevState.sessionLength - 60,
           }));
         }
         break;
       case 'session-increment':
         if (state.sessionLength >= 3600) {
-          setState({ ...state, sessionLength: 3600, timeLeft: 3600 });
+          setState({ ...state, sessionLength: 3600, sessionTimeLeft: 3600 });
         } else {
           setState((prevState) => ({
-            ...state,
+            ...prevState,
             sessionLength: prevState.sessionLength + 60,
-            timeLeft: prevState.sessionLength + 60,
+            sessionTimeLeft: prevState.sessionLength + 60,
           }));
         }
         break;

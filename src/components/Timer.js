@@ -1,9 +1,19 @@
 function Timer(props) {
   const { state, handlePause, handleReset } = props;
 
-  function timerDisplay() {
-    let minute = Math.floor(state.timeLeft / 60);
-    let second = state.timeLeft % 60;
+  function displayBreakTimeLeft() {
+    let minute = Math.floor(state.breakTimeLeft / 60);
+    let second = state.breakTimeLeft % 60;
+
+    let computedSecond = String(second).length === 1 ? `0${second}` : second;
+    let computedMinute = String(minute).length === 1 ? `0${minute}` : minute;
+
+    return computedMinute + ':' + computedSecond;
+  }
+
+  function displaySessionTimeLeft() {
+    let minute = Math.floor(state.sessionTimeLeft / 60);
+    let second = state.sessionTimeLeft % 60;
 
     let computedSecond = String(second).length === 1 ? `0${second}` : second;
     let computedMinute = String(minute).length === 1 ? `0${minute}` : minute;
@@ -16,7 +26,7 @@ function Timer(props) {
         <h2>{state.isBreak ? 'Break' : 'Session'}</h2>
       </div>
       <div id="time-left" className="time-left">
-        {timerDisplay()}
+        {state.isBreak ? displayBreakTimeLeft() : displaySessionTimeLeft()}
       </div>
       <button
         id="start_stop"

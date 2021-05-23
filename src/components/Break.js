@@ -1,6 +1,5 @@
 function Break(props) {
   const { state, changeBreakLength } = props;
-  let breakLength = state.breakLength / 60;
 
   return (
     <div className="break">
@@ -9,21 +8,23 @@ function Break(props) {
       </div>
       <div className="timer-setting">
         <button
+          type="button"
           id="break-decrement"
           className="break-decrement"
           onClick={changeBreakLength}
         >
-          <i class="fas fa-arrow-down"></i>
+          <i className="fas fa-arrow-down" />
         </button>
         <div id="break-length" className="break-length">
-          {breakLength}
+          {state.breakLength / 60}
         </div>
         <button
+          type="button"
           id="break-increment"
           className="break-increment"
           onClick={changeBreakLength}
         >
-          <i class="fas fa-arrow-up"></i>
+          <i className="fas fa-arrow-up" />
         </button>
       </div>
     </div>
