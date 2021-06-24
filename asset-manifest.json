@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/static/css/main.481584e5.chunk.css",
+    "main.js": "/static/js/main.072e0274.chunk.js",
+    "main.js.map": "/static/js/main.072e0274.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.ebdfeddd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.ebdfeddd.js.map",
+    "static/css/2.4f8976c6.chunk.css": "/static/css/2.4f8976c6.chunk.css",
+    "static/js/2.21f0668a.chunk.js": "/static/js/2.21f0668a.chunk.js",
+    "static/js/2.21f0668a.chunk.js.map": "/static/js/2.21f0668a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.4f8976c6.chunk.css.map": "/static/css/2.4f8976c6.chunk.css.map",
+    "static/css/main.481584e5.chunk.css.map": "/static/css/main.481584e5.chunk.css.map",
+    "static/js/2.21f0668a.chunk.js.LICENSE.txt": "/static/js/2.21f0668a.chunk.js.LICENSE.txt",
+    "static/media/beep-sound.aabe39b1.mov": "/static/media/beep-sound.aabe39b1.mov"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ebdfeddd.js",
+    "static/css/2.4f8976c6.chunk.css",
+    "static/js/2.21f0668a.chunk.js",
+    "static/css/main.481584e5.chunk.css",
+    "static/js/main.072e0274.chunk.js"
+  ]
+}
