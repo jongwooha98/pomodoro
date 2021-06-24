@@ -18,34 +18,6 @@ function App() {
     isBreak: false,
   });
 
-  // useEffect(() => {
-  //   let intervalId;
-  //   if (state.isActive && state.timeLeft > 0) {
-  //     intervalId = setInterval(() => {
-  //       setState((prevState) => ({
-  //         ...state,
-  //         timeLeft: prevState.timeLeft - 1,
-  //       }));
-  //       console.log('useEffect');
-  //     }, 1000);
-  //   } else if (!state.isBreak && state.timeLeft === 0) {
-  //     setState((prevState) => ({
-  //       ...state,
-  //       isBreak: !prevState.isBreak,
-  //       timeLeft: state.breakLength,
-  //     }));
-  //     beep.play();
-  //   } else if (state.isBreak && state.timeLeft === 0) {
-  //     setState((prevState) => ({
-  //       ...state,
-  //       isBreak: !prevState.isBreak,
-  //       timeLeft: state.sessionLength,
-  //     }));
-  //     beep.play();
-  //   }
-  //   return () => clearInterval(intervalId);
-  // }, [state, beep]);
-
   useEffect(() => {
     // let sessionIntervalId;
     let intervalId;
@@ -55,7 +27,7 @@ function App() {
           intervalId = setInterval(() => {
             setState((prevState) => ({
               ...prevState,
-              sessionTimeLeft: prevState.sessionTimeLeft - 10,
+              sessionTimeLeft: prevState.sessionTimeLeft - 1,
             }));
             console.log('in session...');
           }, 1000);
@@ -72,7 +44,7 @@ function App() {
           intervalId = setInterval(() => {
             setState((prevState) => ({
               ...prevState,
-              breakTimeLeft: prevState.breakTimeLeft - 10,
+              breakTimeLeft: prevState.breakTimeLeft - 1,
             }));
             console.log('in break...');
           }, 1000);
@@ -89,7 +61,14 @@ function App() {
     }
 
     return () => clearInterval(intervalId);
-  });
+  }, [
+    state.isBreak,
+    state.isActive,
+    state.sessionTimeLeft,
+    state.breakTimeLeft,
+    state.sessionLength,
+    state.breakLength,
+  ]);
 
   function handleReset() {
     setState({
@@ -114,13 +93,13 @@ function App() {
   function changeBreakLength(event) {
     switch (event.target.id) {
       case 'break-decrement':
+        console.log('clicked break dec');
         if (state.breakLength <= 60) {
           setState({
             ...state,
             breakLength: 60,
             breakTimeLeft: 60,
           });
-          console.log('clicked break dec');
         } else {
           setState((prevState) => ({
             ...prevState,
@@ -130,6 +109,7 @@ function App() {
         }
         break;
       case 'break-increment':
+        console.log('clicked break inc');
         if (state.breakLength >= 3600) {
           setState({ ...state, breakLength: 3600, breakTimeLeft: 3600 });
         } else {
@@ -144,10 +124,11 @@ function App() {
         break;
     }
   }
-  // Combine changeBreakLength fxn and changeSessionLength fxn
+
   function changeSessionLength(event) {
     switch (event.target.id) {
       case 'session-decrement':
+        console.log('clicked session dec');
         if (state.sessionLength <= 60) {
           setState({ ...state, sessionLength: 60, sessionTimeLeft: 60 });
         } else {
@@ -159,6 +140,7 @@ function App() {
         }
         break;
       case 'session-increment':
+        console.log('clicked session inc');
         if (state.sessionLength >= 3600) {
           setState({ ...state, sessionLength: 3600, sessionTimeLeft: 3600 });
         } else {

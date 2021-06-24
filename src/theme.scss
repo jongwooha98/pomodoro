@@ -16,3 +16,10 @@ $sizeMd3: 1.5rem;
 $sizeLg1: 2rem;
 $sizeLg2: 3rem;
 $sizeLg3: 4rem;
+
+$breakpointMd: 768px;
+@mixin --viewportMd {
+  @media (min-width: $breakpointMd) {
+    @content;
+  }
+}

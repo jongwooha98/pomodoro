@@ -13,23 +13,35 @@
   color: $colorText;
   letter-spacing: 0.1rem;
   .title {
+    margin: 1rem 0;
     h1 {
-      font-size: $sizeLg3;
+      font-size: $sizeLg1;
+      @include --viewportMd {
+        font-size: $sizeLg2;
+      }
+      font-weight: bold;
     }
   }
-
   .session_break {
-    width: 50%;
     display: flex;
     flex-flow: row;
     justify-content: space-evenly;
+    align-items: center;
+    width: 80%;
+    @include --viewportMd {
+      width: 60%;
+    }
     .session {
       display: flex;
       flex-flow: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0.5rem 1rem;
       background-color: #fff;
+      border-radius: 1rem;
       .session-label {
         h3 {
-          font-size: $sizeMd2;
+          font-size: $sizeMd1;
           font-weight: bold;
         }
       }
@@ -37,15 +49,20 @@
         display: flex;
         flex-flow: row;
         justify-content: center;
+        align-items: center;
         button {
           padding: 1rem;
-          &.session-decrement {
-            background-color: blue;
-            border-style: none;
-          }
-          &.session-increment {
-            background-color: blue;
-            border-style: none;
+          border-style: none;
+          width: 1rem;
+          height: 1rem;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #565360;
+          &:hover {
+            background-color: $colorAccent;
+            color: #fff;
           }
         }
         .session-length {
@@ -57,10 +74,14 @@
     .break {
       display: flex;
       flex-flow: column;
+      justify-content: center;
+      align-items: center;
       background-color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 1rem;
       .break-label {
         h3 {
-          font-size: $sizeMd2;
+          font-size: $sizeMd1;
           font-weight: bold;
         }
       }
@@ -68,21 +89,26 @@
         display: flex;
         flex-flow: row;
         justify-content: center;
+        align-items: center;
+
         button {
           padding: 1rem;
+          width: 1rem;
+          height: 1rem;
+          border-style: none;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: #565360;
 
-          &.break-decrement {
-            background-color: inherit;
-            border-style: none;
-          }
-          &.break-increment {
-            background-color: inherit;
-            border-style: none;
+          &:hover {
+            background-color: $colorAccent;
+            color: #fff;
           }
         }
         .break-length {
           margin: 0 0.5rem;
-
           font-size: $sizeLg1;
         }
       }
@@ -93,11 +119,13 @@
     box-sizing: border-box;
     display: flex;
     flex-flow: column;
-    // justify-content: center;
+    justify-content: center;
     align-items: center;
-
-    width: 80%;
-    padding: 5rem 0;
+    width: 90%;
+    @include --viewportMd {
+      width: 60%;
+    }
+    padding: 4rem 0;
     margin: 1rem;
     background-color: #fff;
     border-radius: 5rem;
@@ -110,6 +138,7 @@
     .time-left {
       margin: 1rem;
       font-size: $sizeLg3;
+      font-weight: normal;
     }
     button {
       box-sizing: border-box;
@@ -125,6 +154,7 @@
         border-radius: 1rem;
       }
       &.reset {
+        margin-top: 2rem;
         font-weight: bold;
         border-radius: 0.5rem;
       }
